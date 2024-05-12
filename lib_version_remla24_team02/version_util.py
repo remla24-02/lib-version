@@ -1,18 +1,18 @@
-import subprocess
+from importlib import metadata
+
+
+PACKAGE_NAME = "lib_version_remla24_team02"
 
 
 class VersionUtil:
+    """
+    Return the current version of the library from meta-data.
+    """
     @staticmethod
     def get_version():
         try:
-            # Get the latest Git tag
-            latest_git_tag = subprocess.check_output(['git', 'describe', '--tags']).decode().strip()
+            library_version = metadata.version(PACKAGE_NAME)
+        except metadata.PackageNotFoundError:
+            library_version = "Package not found"
 
-            if latest_git_tag.startswith('v'):
-                lib_version = latest_git_tag[1:]
-            else:
-                lib_version = latest_git_tag
-        except subprocess.CalledProcessError:
-            lib_version = 'No tags available or git repository not found.'
-
-        return lib_version
+        return library_version

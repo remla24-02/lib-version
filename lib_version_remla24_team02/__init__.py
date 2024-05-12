@@ -1,1 +1,1 @@
-from .version_util import VersionUtil
+from .version_util import VersionUtil, PACKAGE_NAME
