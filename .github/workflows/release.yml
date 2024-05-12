@@ -24,10 +24,10 @@ jobs:
 
       - name: Get latest tag
         id: tag
-        run: echo "::set-output name=version::${GITHUB_REF#refs/tags/v}"
+        run: echo ::set-output name=TAG_NAME::$(echo $GITHUB_REF | cut -d / -f 3)
 
       - name: Update version in setup.py
-        run: sed -i "s/version='.*'/version='${{ steps.tag.outputs.version }}'/" setup.py
+        run: sed -i "s/{{VERSION}}/${{ steps.tag.outputs.TAG_NAME }}/g" setup.py
 
       - name: Build and publish
         env:
