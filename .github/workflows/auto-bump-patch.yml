@@ -4,7 +4,7 @@ on:
     types:
       - closed
     branches:
-      - main
+      - fix-auto-bumping
 
 jobs:
   build:
